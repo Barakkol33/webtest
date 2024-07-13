@@ -1,7 +1,4 @@
-flask
-flask-cors
-flask-socketio
-gevent
-gevent-websocket
-googlemaps
-folium
+fastapi-login
+fastapi
+uvicorn
+itsdangerous
