@@ -28,7 +28,7 @@ function LoginPage() {
     }
 
     try {
-      const response2 = await axios.get('http://127.0.0.1:8000/protected', {
+      const response2 = await axios.get('http://127.0.0.1:8000/user_home', {
         withCredentials: true,
       });
       setMessage(response2.data.msg);

@@ -1,10 +1,15 @@
-from fastapi import FastAPI, Depends, HTTPException
-from fastapi.security import OAuth2PasswordRequestForm
-from fastapi_login import LoginManager
-from starlette.responses import JSONResponse
-from starlette.middleware.sessions import SessionMiddleware
-from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi_login import LoginManager
+from starlette.middleware.sessions import SessionMiddleware
+from starlette.requests import Request
+from starlette.responses import JSONResponse
+
+from logic import get_job, get_job_file_content
 
 SECRET = "your-secret-key"
 app = FastAPI()
@@ -28,6 +33,15 @@ manager = LoginManager(SECRET, token_url="/auth/login", use_cookie=True, cookie_
 
 users_db = {"testuser": {"username": "testuser", "password": "testpassword"}}
 
+app.mount("/static", StaticFiles(directory="../build/static"))
+
+templates = Jinja2Templates(directory="../build")
+
+
+@app.get("/")
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
 
 @manager.user_loader()
 def load_user(username: str):
@@ -48,8 +62,18 @@ def login(data: OAuth2PasswordRequestForm = Depends()):
     return response
 
 
-@app.get("/protected")
-def protected_route(user=Depends(manager)):
+@app.get("/execution/{execution_id}/{job_id}")
+def api_get_job(execution_id: str, job_id: str):
+    return get_job(execution_id=execution_id, job_id=job_id)
+
+
+@app.get("/execution/{execution_id}/{job_id}/{file_id}")
+def api_get_job_file_content(execution_id: str, job_id: str, file_id: str):
+    return get_job_file_content(execution_id=execution_id, job_id=job_id, file_name=file_id)
+
+
+@app.get("/executions")
+def get_executions(user=Depends(manager)):
     return {"msg": f"Hello {user['username']}"}
 
 

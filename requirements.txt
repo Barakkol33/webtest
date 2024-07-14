@@ -2,3 +2,7 @@ fastapi-login
 fastapi
 uvicorn
 itsdangerous
+jinja2
+pydantic
+
+pytest
