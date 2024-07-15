@@ -1,9 +1,8 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
+.DS_Store
 
 # testing
 /coverage
@@ -22,6 +21,15 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-*__pycache__*
+package-lock.json
+yarn.lock
 
-*.idea*
+commit.sh
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/.gitignore
+/.idea/material-dashboard-react-main.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+/.idea/webtest.iml
