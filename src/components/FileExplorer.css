@@ -1,0 +1,46 @@
+/* FileExplorer.css */
+.container {
+  display: flex;
+  height: calc(100% - 40px); /* Adjust for filename display height */
+
+}
+
+.wrapper {
+  background-color: #070769;
+  padding: 10px;
+  height: 100vh;
+  color: white;
+}
+
+.filename-display {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.toolbar {
+  width: 200px;
+  background-color: #737070;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.tree-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.content-box {
+  flex: 1;
+  background-color: black;
+  color: white;
+  padding: 20px;
+}
+
+.selected-item {
+  background-color: lightgray;
+  color: black;
+}

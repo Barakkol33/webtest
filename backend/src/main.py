@@ -9,7 +9,7 @@ from starlette.middleware.sessions import SessionMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from logic import get_job, get_job_file_content
+from logic import get_job, get_job_file_content, get_executions, get_execution
 
 SECRET = "your-secret-key"
 app = FastAPI()
@@ -33,7 +33,7 @@ manager = LoginManager(SECRET, token_url="/auth/login", use_cookie=True, cookie_
 
 users_db = {"testuser": {"username": "testuser", "password": "testpassword"}}
 
-app.mount("/static", StaticFiles(directory="../build/static"))
+# app.mount("/static", StaticFiles(directory="../build/static"))
 
 templates = Jinja2Templates(directory="../build")
 
@@ -67,14 +67,19 @@ def api_get_job(execution_id: str, job_id: str):
     return get_job(execution_id=execution_id, job_id=job_id)
 
 
+@app.get("/execution/{execution_id}")
+def api_get_execution(execution_id: str):
+    return get_execution(execution_id=execution_id)
+
+
 @app.get("/execution/{execution_id}/{job_id}/{file_id}")
 def api_get_job_file_content(execution_id: str, job_id: str, file_id: str):
     return get_job_file_content(execution_id=execution_id, job_id=job_id, file_name=file_id)
 
 
 @app.get("/executions")
-def get_executions(user=Depends(manager)):
-    return {"msg": f"Hello {user['username']}"}
+def api_get_executions():
+    return get_executions()
 
 
 def main():

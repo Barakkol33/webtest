@@ -47,7 +47,7 @@ def get_executions():
     return [Execution.from_directory(directory) for directory in (DB_PATH / "executions").iterdir()]
 
 
-def get_execution_details(execution_id: str) -> Execution:
+def get_execution(execution_id: str) -> Execution:
     return [Execution.from_directory(directory) for directory in (DB_PATH / "executions").iterdir()
             if directory.name == execution_id][0]
 
@@ -57,7 +57,7 @@ def get_executions_ids():
 
 
 def get_execution_jobs_ids(execution_id: str) -> list[str]:
-    return [job.id for job in get_execution_details(execution_id).jobs]
+    return [job.id for job in get_execution(execution_id).jobs]
 
 
 def get_job(execution_id: str, job_id: str) -> Job:
