@@ -1,0 +1,20 @@
+/* DynamicTable.css */
+.dynamic-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dynamic-table th, .dynamic-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.dynamic-table th {
+  background-color: #f4f4f4;
+}
+
+.category-row {
+  background-color: #d3d3d3;
+  font-weight: bold;
+}
