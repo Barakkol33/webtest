@@ -57,7 +57,7 @@ const itemsData = [
 
 function App() {
     return (
-        <ItemList items={itemsData} linkFormat={`/item/{}`}></ItemList>
+        <ItemList items={itemsData} linkFormat={`/execution/{}`}></ItemList>
     );
 }
 

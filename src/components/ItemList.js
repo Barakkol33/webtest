@@ -5,12 +5,11 @@ import MDBox from "./MDBox";
 import DashboardLayout from "../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../examples/Navbars/DashboardNavbar";
 
-function ItemList({ items, linkFormat}) {
+function ItemList({ items, linkFormat, formatCardDetails }) {
     const navigate = useNavigate();
 
-    const handleCardClick = (itemName) => {
-        console.log(typeof(linkFormat))
-        navigate(linkFormat.replace("{}", itemName));
+    const handleCardClick = (itemId) => {
+        navigate(linkFormat.replace("{}", itemId));
     };
 
     return (
@@ -19,14 +18,14 @@ function ItemList({ items, linkFormat}) {
             <MDBox>
                 <Box sx={{ maxHeight: '80vh', overflowY: 'auto' }}>
                     {items.map((item, index) => (
-                        <MDBox key={index} py={1} onClick={() => handleCardClick(item.name)}>
+                        <MDBox key={index} py={1} onClick={() => handleCardClick(item.id)}>
                             <Card sx={{ cursor: 'pointer' }}>
                                 <MDBox p={2}>
                                     <Typography variant="h5" component="div" fontWeight="bold">
-                                        {item.name}
+                                        {item.id}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="div">
-                                        {item.user}, {new Date(item.date).toLocaleDateString()}, {item.var1}, {item.var2}
+                                        {formatCardDetails(item)}
                                     </Typography>
                                 </MDBox>
                             </Card>

@@ -44,13 +44,14 @@ import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-import Jobs from "layouts/jobs";
+import Jobs from "layouts/execution";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
 import JobPage from "./layouts/job";
 import TestPage from "./layouts/testpage";
 import PortfolioPage from "./layouts/PortfolioPage";
+import Execution from "layouts/execution";
 
 const routes = [
     {
@@ -60,30 +61,34 @@ const routes = [
         icon: <Icon fontSize="small">job</Icon>,
         route: "/job",
         component: <JobPage/>,
+        sidenav: true
     },
     {
         type: "collapse",
-        name: "Jobs",
-        key: "jobs",
-        icon: <Icon fontSize="small">jobs</Icon>,
-        route: "/jobs",
-        component: <Jobs/>,
+        name: "Execution",
+        key: "execution",
+        icon: <Icon fontSize="small">AcUnit</Icon>,
+        route: "/execution/:id",
+        component: <Execution/>,
+        sidenav: true
     },
     {
         type: "collapse",
         name: "Portfolio",
         key: "portfolio",
-        icon: <Icon fontSize="small">jobs</Icon>,
+        icon: <Icon fontSize="small">login</Icon>,
         route: "/portfolio",
-        component: <PortfolioPage />,
+        component: <PortfolioPage/>,
+        sidenav: true
     },
-     {
+    {
         type: "collapse",
         name: "Test",
-        key: "tob",
-        icon: <Icon fontSize="small">job</Icon>,
-        route: "/tob",
+        key: "test",
+        icon: <Icon fontSize="small">"GridOn"</Icon>,
+        route: "/test",
         component: <TestPage/>,
+        sidenav: true
     }
 ];
 

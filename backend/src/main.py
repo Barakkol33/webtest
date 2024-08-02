@@ -33,9 +33,9 @@ manager = LoginManager(SECRET, token_url="/auth/login", use_cookie=True, cookie_
 
 users_db = {"testuser": {"username": "testuser", "password": "testpassword"}}
 
-# app.mount("/static", StaticFiles(directory="../build/static"))
+app.mount("/static", StaticFiles(directory="../../build/static"))
 
-templates = Jinja2Templates(directory="../build")
+templates = Jinja2Templates(directory="../../build")
 
 
 @app.get("/")
@@ -62,24 +62,29 @@ def login(data: OAuth2PasswordRequestForm = Depends()):
     return response
 
 
-@app.get("/execution/{execution_id}/{job_id}")
+@app.get("/api/execution/{execution_id}/{job_id}")
 def api_get_job(execution_id: str, job_id: str):
     return get_job(execution_id=execution_id, job_id=job_id)
 
 
-@app.get("/execution/{execution_id}")
+@app.get("/api/execution/{execution_id}")
 def api_get_execution(execution_id: str):
     return get_execution(execution_id=execution_id)
 
 
-@app.get("/execution/{execution_id}/{job_id}/{file_id}")
+@app.get("/api/execution/{execution_id}/{job_id}/{file_id}")
 def api_get_job_file_content(execution_id: str, job_id: str, file_id: str):
     return get_job_file_content(execution_id=execution_id, job_id=job_id, file_name=file_id)
 
 
-@app.get("/executions")
+@app.get("/api/executions")
 def api_get_executions():
     return get_executions()
+
+
+@app.get("/{full_path:path}")
+async def serve_react_app(request: Request, full_path: str):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 def main():
